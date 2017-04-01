@@ -32,30 +32,19 @@ def decimalConvert(intNum, base):
 
     return result
 
-# binary to decimal
-def binary2Decimal(binaryNum):
-    binary_reverse = str(binaryNum)[::-1]
+# convert to decimal
+def toDecimal(num, base):
+    reverse = str(num)[::-1]
+    reference = '0123456789ABCDEF';
     decimal_result = 0
 
-    for index, b in enumerate(binary_reverse):
-        if int(b) > 0:
-            decimal_result += (2 ** index)
-
-    return decimal_result
-
-# hex to decimal
-def hex2Decimal(hexNum):
-    hex_reverse = str(hexNum)[::-1]
-    hex_reference = '0123456789ABCDEF';
-    decimal_result = 0
-
-    for index, b in enumerate(hex_reverse):
-        multiple = hex_reference.index(b)
-        decimal_result += (16 ** index) * multiple
+    for index, b in enumerate(reverse):
+        multiple = reference.index(b)
+        decimal_result += (base ** index) * multiple
 
     return decimal_result
 
 print('Decimal: {} -> Binary: {}'.format(100, decimalConvert(100, 2)))
 print('Decimal: {} -> Hex: {}'.format(250, decimalConvert(250, 16)))
-print('Binary: {} -> Decimal: {}'.format(10101, binary2Decimal(10101)))
-print('Hex: {} -> Decimal: {}'.format('D1F', hex2Decimal('D1F')))
+print('Binary: {} -> Decimal: {}'.format(10101, toDecimal(10101, 2)))
+print('Hex: {} -> Decimal: {}'.format('D1F', toDecimal('D1F', 16)))
