@@ -16,20 +16,21 @@ class Stack:
 
 # practice
 
-# decimal to binary
-def decimal2Binary(intNum):
+# decimal convert
+def decimalConvert(intNum, base):
     remainder_num = intNum
-    binary_stack = Stack()
-    binary_result = ''
+    rem_stack = Stack()
+    result = ''
+    reference = '0123456789ABCDEF';
 
     while (remainder_num > 0):
-        binary_stack.push(remainder_num % 2)
-        remainder_num = remainder_num // 2
+        rem_stack.push(reference[remainder_num % base])
+        remainder_num = remainder_num // base
 
-    while (not binary_stack.isEmpty()):
-        binary_result += str(binary_stack.pop())
+    while (not rem_stack.isEmpty()):
+        result += str(rem_stack.pop())
 
-    return binary_result
+    return result
 
 # binary to decimal
 def binary2Decimal(binaryNum):
@@ -41,23 +42,6 @@ def binary2Decimal(binaryNum):
             decimal_result += (2 ** index)
 
     return decimal_result
-
-# decimal to hex
-def decimal2Hex(intNum):
-    remainder_num = intNum
-    hex_stack = Stack()
-    hex_result = ''
-    hex_reference = '0123456789ABCDEF';
-
-    while (remainder_num > 0):
-        remainder = remainder_num % 16;
-        hex_stack.push(hex_reference[remainder])
-        remainder_num = remainder_num // 16
-
-    while (not hex_stack.isEmpty()):
-        hex_result += str(hex_stack.pop())
-
-    return hex_result
 
 # hex to decimal
 def hex2Decimal(hexNum):
@@ -71,7 +55,7 @@ def hex2Decimal(hexNum):
 
     return decimal_result
 
-print('Decimal: {} -> Binary: {}'.format(100, decimal2Binary(100)))
-print('Decimal: {} -> Hex: {}'.format(250, decimal2Hex(250)))
+print('Decimal: {} -> Binary: {}'.format(100, decimalConvert(100, 2)))
+print('Decimal: {} -> Hex: {}'.format(250, decimalConvert(250, 16)))
 print('Binary: {} -> Decimal: {}'.format(10101, binary2Decimal(10101)))
 print('Hex: {} -> Decimal: {}'.format('D1F', hex2Decimal('D1F')))
