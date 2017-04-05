@@ -1,3 +1,4 @@
+# 給出一個數，並算出範圍中的質數
 num = int(raw_input("Give a range."))
 
 import time
