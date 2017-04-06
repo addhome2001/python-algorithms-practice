@@ -9,7 +9,9 @@ class Stack:
         self.items.append(item)
 
     def pop(self):
-        return self.items.pop()
+        if not self.isEmpty():
+            return self.items.pop()
+        return False
 
     def size(self):
         return len(self.items)
