@@ -6,7 +6,7 @@ class Queue:
         self.items.append(item)
 
     def dequeue(self):
-        if self.isEmpty():
+        if not self.isEmpty():
             return self.items.pop(0)
         return False
 
@@ -50,6 +50,21 @@ class PriorityQueue(Queue):
         else:
             self.items.append(priorityItem(item, priority))
 
+def hotPotato(members, number):
+    queue = Queue()
+
+    for member in members:
+        queue.enqueue(member)
+
+    while (queue.size() is not 1):
+        counter = number
+        while (counter > 0):
+            counter -= 1
+            queue.enqueue(queue.dequeue())
+
+        print("{} get out.".format(queue.dequeue()))
+
+    print("{} is winner!".format(queue.dequeue()))
 
 print('Normal Queue')
 print('-------------')
@@ -71,3 +86,8 @@ prio_queue.enqueue("Sam", 4)
 prio_queue.enqueue("Hai", 3)
 prio_queue.enqueue("Ken", 2)
 prio_queue.preview()
+print('')
+print('Hot Potato')
+print('-------------')
+members = ['Jay', 'Abbey' ,'Kevin' ,'Ben' ,'Sam', "Hai", "Ken"]
+hotPotato(members, 7)
