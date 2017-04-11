@@ -25,15 +25,20 @@ class Queue:
         return self.size() <= 0
 
     def preview(self):
-        for x in self.items:
-            print(x)
+        for item in self.items:
+            print(item)
 
 # practice
-def priorityItem(item, priority):
-    return {
-        "item": item,
-        "priority": priority
-    }
+class PriorityItem:
+    def __init__(self, item, priority):
+        self.item = item
+        self.priority = priority
+
+    def get_item(self):
+        return self.item
+
+    def get_priority(self):
+        return self.priority
 
 class PriorityQueue(Queue):
     def __init__(self):
@@ -41,14 +46,20 @@ class PriorityQueue(Queue):
 
     def enqueue(self, item, priority=0):
         if self.isEmpty():
-           return self.items.append(priorityItem(item, priority))
+            return self.items.append(PriorityItem(item, priority))
 
         for i in range(0, self.size()):
-            if (priority > self.items[i].get('priority')):
-                self.items[i:i] = [priorityItem(item, priority)]
+            if (priority > self.items[i].get_priority()):
+                self.items[i:i] = [PriorityItem(item, priority)]
                 break
         else:
-            self.items.append(priorityItem(item, priority))
+            self.items.append(PriorityItem(item, priority))
+
+    def preview(self):
+        for item in self.items:
+            print('Item: {}, Priority: {}'.format(
+                item.get_item(), item.get_priority()
+            ))
 
 def hotPotato(members, number):
     queue = Queue()
