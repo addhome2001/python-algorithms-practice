@@ -1,25 +1,5 @@
 #-*- coding: utf-8 -*-
 
-# 快速排序
-def sort_quick(arr):
-    if len(arr) is 0:
-        return arr
-
-    left = []
-    right = []
-    middle_digit_index = int(len(arr) / 2)
-    middle_digit = arr[middle_digit_index]
-
-    for i in range(len(arr)):
-        if i is middle_digit_index:
-            continue
-        if arr[i] < middle_digit:
-            left.append(arr[i])
-        else:
-            right.append(arr[i])
-
-    return sort_quick(left) + [middle_digit] + sort_quick(right)
-
 # 算出阿姆斯壯數
 # 從一個範圍算出所有阿姆斯壯數
 def find_armstrong_range(n):
@@ -32,8 +12,8 @@ def find_armstrong_range(n):
         seperate_num_list = list(str(i))
         # 先將數字進行排序，並放入暫存
         # 例如123、231、321結果相同，用暫存可避免重複計算
-        sorted_list = sort_quick(seperate_num_list)
-        alias = ''.join(sorted_list)
+        seperate_num_list.sort()
+        alias = ''.join(seperate_num_list)
         alias_len = len(alias)
 
         if alias not in n_dices:
@@ -60,8 +40,8 @@ def find_armstrong_digit(n):
         seperate_num_list = list(str(i))
         # 先將數字進行排序，並放入暫存
         # 例如123、231、321結果相同，用暫存可避免重複計算
-        sorted_list = sort_quick(seperate_num_list)
-        alias = ''.join(sorted_list)
+        seperate_num_list.sort()
+        alias = ''.join(seperate_num_list)
 
         if alias not in n_dices:
             sum_a = 0
