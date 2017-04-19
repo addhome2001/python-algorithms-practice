@@ -63,7 +63,7 @@ class LinkedList:
         return -1
 
     def removeAt(self, position):
-        if position >= 0 and position <= self.length:
+        if self.length > 0 and position >= 0 and position <= self.length:
             current = self.head
             index = 0
 
@@ -98,6 +98,7 @@ class LinkedList:
         return string
 
 linked_list = LinkedList()
+linked_list.removeAt(0)
 linked_list.append('Ben')
 linked_list.append('Jam')
 linked_list.remove('Hai')
