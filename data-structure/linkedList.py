@@ -38,13 +38,14 @@ class LinkedList:
 
                 prev.next = node
                 node.next = current
+
             self.length += 1
             return True
         else:
             return False
 
     def getHead(self):
-        return self.head
+        return self.head.element
 
     def remove(self, element):
         index = self.indexOf(element)
@@ -75,7 +76,9 @@ class LinkedList:
                     current = current.next
                     index += 1
                 prev.next = current.next
-                return current
+
+            self.length -= 1
+            return current.element
         else:
             return None
 
@@ -105,6 +108,9 @@ linked_list.remove('Hai')
 linked_list.insert('Juice', 2)
 linked_list.insert('Abbey', 3)
 linked_list.removeAt(2)
+linked_list.removeAt(0)
 print('Index of Abbey: {}'.format(linked_list.indexOf('Abbey')))
 print('Index of Eva: {}'.format(linked_list.indexOf('Eva')))
-print(linked_list.toString())
+print('Size: {}'.format(linked_list.size()))
+print('Head: {}'.format(linked_list.getHead()))
+print('Mebmers: {}'.format(linked_list.toString()))
