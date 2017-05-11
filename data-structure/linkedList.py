@@ -45,7 +45,7 @@ class LinkedList:
             return False
 
     def getHead(self):
-        return self.head.element
+        return self.head
 
     def remove(self, element):
         index = self.indexOf(element)
@@ -92,7 +92,7 @@ class LinkedList:
         return self.length
 
     # string
-    def toString(self):
+    def __str__(self):
         current = self.head
         string = ''
         while (current):
@@ -100,6 +100,8 @@ class LinkedList:
             current = current.next
         return string
 
+print('Linked List')
+print('-------------')
 linked_list = LinkedList()
 linked_list.removeAt(0)
 linked_list.append('Ben')
@@ -112,5 +114,4 @@ linked_list.removeAt(0)
 print('Index of Abbey: {}'.format(linked_list.indexOf('Abbey')))
 print('Index of Eva: {}'.format(linked_list.indexOf('Eva')))
 print('Size: {}'.format(linked_list.size()))
-print('Head: {}'.format(linked_list.getHead()))
-print('Mebmers: {}'.format(linked_list.toString()))
+print('Mebmers: {}'.format(linked_list))
