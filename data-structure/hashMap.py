@@ -1,29 +1,29 @@
-hash_len = 20
+hash_len = 200
 
 class HashMap:
     def __init__(self):
         self.map = [None for _ in xrange(hash_len)]
 
     def set(self, key, value):
-        self.map[loselose(key)] = value
+        self.map[djb2Hash(key)] = value
 
     def remove(self, key):
-        self.map[loselose(key)] = None
+        self.map[djb2Hash(key)] = None
 
     def get(self, key):
-        return self.map[loselose(key)]
+        return self.map[djb2Hash(key)]
 
-def loselose(chars):
-    result = 0
+def djb2Hash(chars):
+    hash_key = 5381
     for char in chars:
-        result += ord(char)
-    return result % hash_len
+        result = hash_key * 37 + ord(char)
+    return result % 198
 
 hash_map = HashMap()
-hash_map.set('name', 'Ben')
-hash_map.set('age', 20)
-print(hash_map.get('name'))
-print(hash_map.get('age'))
-hash_map.remove('name')
-print(hash_map.get('name'))
-print(hash_map.get('age'))
+hash_map.set('Ben', 'ben@example.com')
+hash_map.set('Jay', 'jay@example.com')
+print(hash_map.get('Ben'))
+print(hash_map.get('Jay'))
+hash_map.remove('Ben')
+print(hash_map.get('Ben'))
+print(hash_map.get('Jay'))

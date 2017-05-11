@@ -1,13 +1,13 @@
 from linkedList import LinkedList
 
-hash_len = 20
+hash_len = 100
 
 class HashMap:
     def __init__(self):
         self.map = [None for _ in xrange(hash_len)]
 
     def set(self, key, value):
-        hash_key = loselose(key)
+        hash_key = djb2Hash(key)
 
         # remove the exist key
         self.remove(key)
@@ -18,7 +18,7 @@ class HashMap:
         self.map[hash_key].append(ValuePair(key, value))
 
     def remove(self, key):
-        hash_key = loselose(key)
+        hash_key = djb2Hash(key)
         map_pos = self.map[hash_key]
 
         if map_pos is not None:
@@ -40,7 +40,7 @@ class HashMap:
         return False
 
     def get(self, key):
-        hash_key = loselose(key)
+        hash_key = djb2Hash(key)
         map_pos = self.map[hash_key]
 
         if map_pos is not None:
@@ -64,27 +64,30 @@ class ValuePair:
     def __str__(self):
         return "key: {}, value: {}".format(self.key, self.value)
 
-def loselose(chars):
-    result = 0
+def djb2Hash(chars):
+    hash_key = 5381
     for char in chars:
-        result += ord(char)
-    return result % hash_len
+        result = hash_key * 37 + ord(char)
+    return result % 98
 
 print('')
 print('Separate Chaining Hash Map')
 print('-------------')
 hash_map = HashMap()
-print('Set name: Ben')
-hash_map.set('name', 'Ben')
-print('Set name: Ray')
-hash_map.set('name', 'Ray')
+print('Set Ben')
+hash_map.set('Ben', 'Ben@example.com')
+print('Set Ray')
+hash_map.set('Ray', 'Ray@example.com')
 print('Set z: valueZ')
 hash_map.set('z', 'valueZ')
 print('Set 1I: value1I')
 hash_map.set('1I', 'value1I')
 print('Get z: {}'.format(hash_map.get('z')))
 print('Get 1I: {}'.format(hash_map.get('1I')))
-print('Get name: {}'.format(hash_map.get('name')))
-print('Remove name')
-hash_map.remove('name')
-print('Get name: {}'.format(hash_map.get('name')))
+print('Get Ben: {}'.format(hash_map.get('Ben')))
+print('Change Ben\'s email')
+hash_map.set('Ben', 'Ben@example2.com')
+print('Remove Ray')
+hash_map.remove('Ray')
+print('Get Ray: {}'.format(hash_map.get('Ray')))
+print('Get Ben: {}'.format(hash_map.get('Ben')))
