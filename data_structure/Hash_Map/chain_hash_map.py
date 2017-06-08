@@ -1,10 +1,12 @@
-from linkedList import LinkedList
+import sys, os
+sys.path.insert(0, os.path.abspath('..'))
+from Linked_List.linked_list import LinkedList
 
 hash_len = 100
 
-class HashMap:
+class HashMap(object):
     def __init__(self):
-        self.map = [None for _ in xrange(hash_len)]
+        self.map = [None for _ in range(hash_len)]
 
     def set(self, key, value):
         hash_key = djb2Hash(key)

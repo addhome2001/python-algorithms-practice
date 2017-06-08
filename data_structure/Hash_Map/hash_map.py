@@ -2,7 +2,7 @@ hash_len = 200
 
 class HashMap:
     def __init__(self):
-        self.map = [None for _ in xrange(hash_len)]
+        self.map = [None for _ in range(hash_len)]
 
     def set(self, key, value):
         self.map[djb2Hash(key)] = value
