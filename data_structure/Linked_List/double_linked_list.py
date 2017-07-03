@@ -1,24 +1,43 @@
-class Node():
+# -*- coding: utf-8 -*-
+"""雙向鏈結串連"""
+
+class Node(object):
+    """
+    雙向節點類別
+    比基本結點多了前一個的節點參考
+    """
     def __init__(self, element):
         self.element = element
         self.next = None
         self.prev = None
 
-class DoubleLinkedList:
+class DoubleLinkedList(object):
+    """
+    雙向鏈結串連類別
+    除了頭節點的參考
+    還新增了結尾節點的參考
+    """
     def __init__(self):
         self.length = 0
         self.head = None
         self.tail = None
 
     def append(self, element):
+        """
+        新增節點至尾部
+        如該串連實例不存在任何節點
+        則將新節點新增為實例的頭和尾
+        如該串連實例已存在節點
+        則將該新節點新增至實例尾部
+        """
         node = Node(element)
 
-        if self.head == None:
+        if self.head is None:
             self.head = node
             self.tail = node
         else:
             current = self.head
-            while (current.next):
+            while current.next:
                 current = current.next
 
             node.prev = current
@@ -28,7 +47,12 @@ class DoubleLinkedList:
         self.length += 1
 
     def insert(self, element, position):
-        if type(position) == int and position < self.length:
+        """
+        新增節點至某位置
+        位置參數為0，則將新節點插入至頭部
+        如不為0，則插入至該index的前一個位置
+        """
+        if isinstance(position, int) and position < self.length:
             node = Node(element)
             current = self.head
             index = 0
@@ -40,9 +64,8 @@ class DoubleLinkedList:
                 else:
                     node.next = current
                     self.head = node
-
             else:
-                while (index < position):
+                while index < position:
                     prev = current
                     current = current.next
                     index += 1
@@ -57,21 +80,36 @@ class DoubleLinkedList:
         else:
             return False
 
-    def getHead(self):
+    def get_head(self):
+        """
+        獲取頭部節點
+        """
         return self.head.element
 
-    def getTail(self):
+    def get_tail(self):
+        """
+        獲取尾部節點
+        """
         return self.tail.element
 
     def remove(self, element):
-        index = self.indexOf(element)
-        return self.removeAt(index)
+        """
+        移除節點
+        必須先查找到該筆節點的index
+        在對該index進行移除
+        """
+        index = self.index_of(element)
+        return self.remove_at(index)
 
-    def indexOf(self, element):
+    def index_of(self, element):
+        """
+        查找節點的index
+        不存在則返回-1
+        """
         current = self.head
         index = -1
 
-        while (current):
+        while current:
             index += 1
             if current.element == element:
                 return index
@@ -79,7 +117,13 @@ class DoubleLinkedList:
 
         return -1
 
-    def removeAt(self, position):
+    def remove_at(self, position):
+        """
+        移除該index的節點
+        如位置為0，則對頭部進行移除
+        如位置為最後一位，則對尾部進行移除
+        否則對該index進行查詢，並在移除後返回該節點
+        """
         if self.length > 0 and position >= 0 and position <= self.length:
             current = self.head
             index = 0
@@ -98,7 +142,7 @@ class DoubleLinkedList:
                 self.tail = current.prev
 
             else:
-                while (index < position):
+                while index < position:
                     prev = current
                     current = current.next
                     index += 1
@@ -110,35 +154,44 @@ class DoubleLinkedList:
         else:
             return None
 
-    def isEmpty(self):
+    def is_empty(self):
+        """
+        判斷該實例是否存在節點
+        """
         if self.length == 0:
             return True
-        else:
-            return False
+        return False
 
     def size(self):
+        """
+        返回節點長度
+        """
         return self.length
 
-    def toString(self):
+    def __str__(self):
+        """
+        複寫print方法
+        """
         current = self.head
         string = ''
-        while (current):
+        while current:
             string += '{} '.format(current.element)
             current = current.next
         return string
 
-linked_list = DoubleLinkedList()
-linked_list.removeAt(3)
-linked_list.append('Ben')
-linked_list.append('Jam')
-linked_list.remove('Hai')
-linked_list.insert('Juice', 1)
-linked_list.insert('Acid', 0)
-linked_list.insert('Abbey', 2)
-linked_list.removeAt(1)
-print('Index of Abbey: {}'.format(linked_list.indexOf('Abbey')))
-print('Index of Eva: {}'.format(linked_list.indexOf('Eva')))
-print('Size: {}'.format(linked_list.size()))
-print('Head: {}'.format(linked_list.getHead()))
-print('Tail: {}'.format(linked_list.getTail()))
-print('Mebmers: {}'.format(linked_list.toString()))
+if __name__ == '__main__':
+    linked_list = DoubleLinkedList()
+    linked_list.remove_at(3)
+    linked_list.append('Ben')
+    linked_list.append('Jam')
+    linked_list.remove('Hai')
+    linked_list.insert('Juice', 1)
+    linked_list.insert('Acid', 0)
+    linked_list.insert('Abbey', 2)
+    linked_list.remove_at(1)
+    print('Index of Abbey: {}'.format(linked_list.index_of('Abbey')))
+    print('Index of Eva: {}'.format(linked_list.index_of('Eva')))
+    print('Size: {}'.format(linked_list.size()))
+    print('Head: {}'.format(linked_list.get_head()))
+    print('Tail: {}'.format(linked_list.get_tail()))
+    print('Mebmers: {}'.format(linked_list))
