@@ -9,7 +9,7 @@
     - 鏈結串列(Linked List)
         - 尾部(Tail)
         - 雙向(Double)
-    - 揍雜表(Hash Map)
+    - 揍雜表(Hash Map)
         - 分離鏈結(Chain)
         - 線性查找(Linear)
     - 二叉搜尋樹(BST)
